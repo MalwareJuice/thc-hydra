@@ -41,6 +41,10 @@ int32_t start_ssh(int32_t s, char *ip, int32_t port, unsigned char options, char
     }
 
     session = ssh_new();
+    ssh_options_set(session, SSH_OPTIONS_PASSWORD_AUTHENTICATION, "yes");
+    ssh_options_set(session, SSH_OPTIONS_STRICT_HOSTKEY_CHECK, "no");
+    ssh_options_set(session, SSH_OPTIONS_PREFERRED_AUTHS, "password");
+    ssh_options_set(session, SSH_OPTIONS_PUBKEY_AUTH, "no");
     ssh_options_set(session, SSH_OPTIONS_PORT, &port);
     ssh_options_set(session, SSH_OPTIONS_HOST, hydra_address2string(ip));
     ssh_options_set(session, SSH_OPTIONS_USER, login);
